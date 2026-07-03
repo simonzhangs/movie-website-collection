@@ -83,6 +83,15 @@
     "viewAll": "查看全部",
     "noOverview": "暂无简介。"
   },
+  "search": {
+    "title": "搜索",
+    "placeholder": "搜索电影、电视剧...",
+    "button": "搜索",
+    "resultsFor": "搜索结果：",
+    "found": "找到",
+    "items": "个结果",
+    "emptyState": "输入关键词开始搜索"
+  },
   "notFound": {
     "title": "页面未找到",
     "description": "您访问的页面不存在或已被移动。",

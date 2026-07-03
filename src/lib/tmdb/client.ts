@@ -7,7 +7,7 @@ import type {
   TMDBMediaItem,
   TMDBCastMember,
 } from './types';
-import { mockTrending, mockPopularMovies, mockPopularTV, getMockMediaItem } from './mock-data';
+import { mockTrending, mockPopularMovies, mockPopularTV, getMockMediaItem, getMockSearchResults } from './mock-data';
 
 // 支持通过环境变量覆盖 API 地址（方便使用代理/镜像）
 const TMDB_BASE_URL = process.env.TMDB_BASE_URL || 'https://api.themoviedb.org/3';
@@ -249,6 +249,21 @@ export async function getTopPicks(
   return [...movies, ...tvShows]
     .sort((a, b) => b.vote_average - a.vote_average)
     .slice(0, limit);
+}
+
+// ─── 搜索 ───
+
+export async function searchMulti(
+  query: string,
+  locale: string = 'en',
+  page: number = 1
+): Promise<TMDBPaginatedResponse<TMDBMediaItem>> {
+  return tmdbFetchWithFallback(
+    '/search/multi',
+    locale,
+    { query, page, include_adult: 'false' },
+    getMockSearchResults(query)
+  );
 }
 
 // ─── 辅助函数 ───

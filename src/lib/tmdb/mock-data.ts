@@ -58,6 +58,34 @@ export const mockPopularTV: TMDBPaginatedResponse<TMDBMediaItem> = {
 };
 
 /**
+ * 搜索 mock 数据 — 根据查询词过滤
+ */
+export function getMockSearchResults(query: string): TMDBPaginatedResponse<TMDBMediaItem> {
+  const allItems: TMDBMediaItem[] = [
+    { ...mockItemBase, id: 1, media_type: 'movie', title: 'Mock Movie 1', release_date: '2024-01-15' },
+    { ...mockItemBase, id: 101, title: 'Popular Mock Movie 1', release_date: '2024-01-15' },
+    { ...mockItemBase, id: 102, title: 'Popular Mock Movie 2', release_date: '2024-02-20' },
+    { ...mockItemBase, id: 2, media_type: 'tv', name: 'Mock TV Show 1', first_air_date: '2024-02-20' },
+    { ...mockItemBase, id: 201, name: 'Popular Mock TV 1', first_air_date: '2024-01-15' },
+    { ...mockItemBase, id: 202, name: 'Popular Mock TV 2', first_air_date: '2024-02-20' },
+  ];
+
+  const q = query.toLowerCase();
+  const filtered = allItems.filter(
+    (item) =>
+      (item.title && item.title.toLowerCase().includes(q)) ||
+      (item.name && item.name.toLowerCase().includes(q))
+  );
+
+  return {
+    page: 1,
+    total_pages: 1,
+    total_results: filtered.length,
+    results: filtered,
+  };
+}
+
+/**
  * 根据类型生成单个媒体项的 mock 数据
  */
 export function getMockMediaItem(id: string, type: 'movie' | 'tv') {

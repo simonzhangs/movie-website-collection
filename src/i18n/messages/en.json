@@ -83,6 +83,15 @@
     "viewAll": "View all",
     "noOverview": "No overview available."
   },
+  "search": {
+    "title": "Search",
+    "placeholder": "Search movies, TV shows...",
+    "button": "Search",
+    "resultsFor": "Results for",
+    "found": "Found",
+    "items": "results",
+    "emptyState": "Enter keywords to start searching"
+  },
   "notFound": {
     "title": "Page Not Found",
     "description": "The page you are looking for doesn't exist or has been moved.",
