@@ -1,0 +1,73 @@
+{
+  "nav": {
+    "home": "首页",
+    "movies": "电影",
+    "tv": "电视剧",
+    "trending": "热门"
+  },
+  "home": {
+    "title": "探索电影与电视剧",
+    "subtitle": "发现你喜爱的电影和电视剧的详细信息，包含每一集的剧情介绍。",
+    "popularMovies": "热门电影",
+    "popularTV": "热门电视剧",
+    "trending": "正在流行",
+    "topRated": "最高评分"
+  },
+  "movie": {
+    "overview": "剧情简介",
+    "cast": "演员阵容",
+    "reviews": "评论",
+    "similar": "相似电影",
+    "releaseDate": "上映日期",
+    "runtime": "片长",
+    "status": "状态",
+    "genres": "类型",
+    "rating": "评分",
+    "minutes": "分钟"
+  },
+  "tv": {
+    "overview": "剧情简介",
+    "seasons": "季数",
+    "episodes": "集数",
+    "cast": "演员阵容",
+    "similar": "相似剧集",
+    "firstAired": "首播日期",
+    "status": "状态",
+    "genres": "类型",
+    "rating": "评分",
+    "season": "第",
+    "episode": "集",
+    "episodeList": "剧集列表",
+    "viewEpisodes": "查看剧集"
+  },
+  "episode": {
+    "overview": "本集简介",
+    "airDate": "播出日期",
+    "runtime": "时长",
+    "season": "第",
+    "episode": "集",
+    "minutes": "分钟",
+    "backToShow": "返回剧集"
+  },
+  "listing": {
+    "page": "第",
+    "of": "页 / 共",
+    "prev": "上一页",
+    "next": "下一页",
+    "loading": "加载中..."
+  },
+  "common": {
+    "language": "语言",
+    "search": "搜索...",
+    "noResults": "未找到结果",
+    "error": "出错了",
+    "advertisement": "广告"
+  },
+  "seo": {
+    "siteName": "影视百科",
+    "siteDescription": "发现电影和电视剧的全面信息，包含剧集指南、演员阵容、评论等。",
+    "movieSuffix": " - 电影指南",
+    "tvSuffix": " - 电视剧指南",
+    "episodeSuffix": " - 分集指南"
+  }
+}

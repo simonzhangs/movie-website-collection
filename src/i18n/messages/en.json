@@ -1,0 +1,73 @@
+{
+  "nav": {
+    "home": "Home",
+    "movies": "Movies",
+    "tv": "TV Shows",
+    "trending": "Trending"
+  },
+  "home": {
+    "title": "Discover Movies & TV Shows",
+    "subtitle": "Explore comprehensive information about your favorite movies and TV series, including every episode.",
+    "popularMovies": "Popular Movies",
+    "popularTV": "Popular TV Shows",
+    "trending": "Trending Now",
+    "topRated": "Top Rated"
+  },
+  "movie": {
+    "overview": "Overview",
+    "cast": "Cast",
+    "reviews": "Reviews",
+    "similar": "Similar Movies",
+    "releaseDate": "Release Date",
+    "runtime": "Runtime",
+    "status": "Status",
+    "genres": "Genres",
+    "rating": "Rating",
+    "minutes": "min"
+  },
+  "tv": {
+    "overview": "Overview",
+    "seasons": "Seasons",
+    "episodes": "Episodes",
+    "cast": "Cast",
+    "similar": "Similar Shows",
+    "firstAired": "First Aired",
+    "status": "Status",
+    "genres": "Genres",
+    "rating": "Rating",
+    "season": "Season",
+    "episode": "Episode",
+    "episodeList": "Episode List",
+    "viewEpisodes": "View Episodes"
+  },
+  "episode": {
+    "overview": "Episode Overview",
+    "airDate": "Air Date",
+    "runtime": "Runtime",
+    "season": "Season",
+    "episode": "Episode",
+    "minutes": "min",
+    "backToShow": "Back to Show"
+  },
+  "listing": {
+    "page": "Page",
+    "of": "of",
+    "prev": "Previous",
+    "next": "Next",
+    "loading": "Loading..."
+  },
+  "common": {
+    "language": "Language",
+    "search": "Search...",
+    "noResults": "No results found",
+    "error": "Something went wrong",
+    "advertisement": "Advertisement"
+  },
+  "seo": {
+    "siteName": "CinePedia",
+    "siteDescription": "Discover comprehensive information about movies and TV shows, including episode guides, cast, reviews and more.",
+    "movieSuffix": " - Movie Guide",
+    "tvSuffix": " - TV Show Guide",
+    "episodeSuffix": " - Episode Guide"
+  }
+}
