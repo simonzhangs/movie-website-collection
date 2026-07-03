@@ -2,6 +2,7 @@ import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { getPopularTV, getTopRatedTV } from '@/lib/tmdb/client';
 import MediaGrid from '@/components/media/MediaGrid';
 import AdSlot from '@/components/seo/AdSlot';
+import Breadcrumb from '@/components/seo/Breadcrumb';
 import { Link } from '@/i18n/navigation';
 import type { Metadata } from 'next';
 
@@ -29,6 +30,7 @@ export default async function TVListPage({ params, searchParams }: TVListPagePro
   const page = Math.max(1, parseInt(pageStr || '1', 10) || 1);
 
   const t = await getTranslations('home');
+  const tNav = await getTranslations('nav');
   const tListing = await getTranslations('listing');
 
   const [popular, topRated] = await Promise.all([
@@ -40,7 +42,13 @@ export default async function TVListPage({ params, searchParams }: TVListPagePro
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-      <h1 className="mb-8 text-3xl font-bold text-white">{t('popularTV')}</h1>
+      <Breadcrumb
+        items={[
+          { label: tNav('home'), href: '/' },
+          { label: tNav('tv') },
+        ]}
+      />
+      <h1 className="mb-8 mt-4 text-3xl font-bold text-white">{t('popularTV')}</h1>
 
       {/* ─── 当前页剧集 ─── */}
       <MediaGrid items={popular.results} mediaType="tv" />

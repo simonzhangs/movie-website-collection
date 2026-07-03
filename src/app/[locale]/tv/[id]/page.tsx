@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { getTVDetails, getSimilarTV, getImageUrl, getPopularTVIds } from '@/lib/tmdb/client';
 import { tvMetadata, tvJsonLd } from '@/lib/seo/metadata';
 import JsonLd from '@/components/seo/JsonLd';
+import Breadcrumb from '@/components/seo/Breadcrumb';
 import AdSlot from '@/components/seo/AdSlot';
 import MediaGrid from '@/components/media/MediaGrid';
 import { Link } from '@/i18n/navigation';
@@ -41,6 +42,7 @@ export default async function TVDetailPage({ params }: TVPageProps) {
   setRequestLocale(locale);
 
   const t = await getTranslations('tv');
+  const tNav = await getTranslations('nav');
   const tCommon = await getTranslations('common');
 
   let tv;
@@ -70,11 +72,24 @@ export default async function TVDetailPage({ params }: TVPageProps) {
             alt={tv.name}
             className="absolute inset-0 h-full w-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/60 to-[#0a0a0f]/20" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/60 to-[#0a0a0f]/40" />
+        </div>
+
+        {/* 面包屑导航（浮在 Hero 顶部，深色渐变背景保证可读性） */}
+        <div className="relative mx-auto max-w-7xl px-4 pt-4 sm:px-6 lg:px-8">
+          <div className="rounded-lg bg-black/30 px-3 py-2 backdrop-blur-sm inline-block">
+            <Breadcrumb
+              items={[
+                { label: tNav('home'), href: '/' },
+                { label: tNav('tv'), href: '/tv' },
+                { label: tv.name },
+              ]}
+            />
+          </div>
         </div>
 
         {/* 内容区（通过 padding-top 自然沉底，不遮挡 Hero） */}
-        <div className="relative mx-auto max-w-7xl px-4 pt-[35vh] sm:px-6 lg:px-8 min-h-[350px]">
+        <div className="relative mx-auto max-w-7xl px-4 pt-[30vh] sm:px-6 lg:px-8 min-h-[350px]">
           <div className="flex flex-col gap-8 md:flex-row">
           {/* 海报 */}
           <div className="flex-shrink-0">

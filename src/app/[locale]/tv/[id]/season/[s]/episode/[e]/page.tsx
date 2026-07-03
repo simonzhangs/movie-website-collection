@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { getTVDetails, getEpisodeDetails, getImageUrl } from '@/lib/tmdb/client';
 import { episodeMetadata, episodeJsonLd } from '@/lib/seo/metadata';
 import JsonLd from '@/components/seo/JsonLd';
+import Breadcrumb from '@/components/seo/Breadcrumb';
 import AdSlot from '@/components/seo/AdSlot';
 import { Link } from '@/i18n/navigation';
 import type { Metadata } from 'next';
@@ -44,6 +45,7 @@ export default async function EpisodePage({ params }: EpisodePageProps) {
   const t = await getTranslations('episode');
   const tTv = await getTranslations('tv');
 const tCommon = await getTranslations('common');
+const tNav = await getTranslations('nav');
 
   let tv;
   let episodeData;
@@ -74,24 +76,28 @@ const tCommon = await getTranslations('common');
             alt={`${tv.name} S${season}E${episode} - ${episodeData.name}`}
             className="absolute inset-0 h-full w-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/60 to-[#0a0a0f]/20" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/60 to-[#0a0a0f]/40" />
+        </div>
+
+        {/* 面包屑导航（浮在 Hero 顶部，深色渐变背景保证可读性） */}
+        <div className="relative mx-auto max-w-7xl px-4 pt-4 sm:px-6 lg:px-8">
+          <div className="rounded-lg bg-black/30 px-3 py-2 backdrop-blur-sm inline-block">
+            <Breadcrumb
+              items={[
+                { label: tNav('home'), href: '/' },
+                { label: tNav('tv'), href: '/tv' },
+                { label: tv.name, href: `/tv/${id}` },
+                { label: `${tTv('season')} ${season}` },
+                { label: `${t('episode')} ${episode}: ${episodeData.name}` },
+              ]}
+            />
+          </div>
         </div>
 
         {/* 内容区（通过 padding-top 自然沉底，不遮挡 Hero） */}
-        <div className="relative mx-auto max-w-4xl px-4 pt-[30vh] sm:px-6 lg:px-8 min-h-[300px]">
-          {/* ─── 面包屑 ─── */}
-          <nav className="flex items-center gap-2 text-sm text-gray-400">
-          <Link href={`/tv/${id}`} className="transition hover:text-indigo-400">
-            {tv.name}
-          </Link>
-          <span>/</span>
-          <span className="text-gray-300">
-            {tTv('season')} {season} · {t('episode')} {episode}
-          </span>
-        </nav>
-
-        {/* ─── 标题 ─── */}
-        <div className="mt-6">
+        <div className="relative mx-auto max-w-4xl px-4 pt-[25vh] sm:px-6 lg:px-8 min-h-[300px]">
+          {/* ─── 标题 ─── */}
+          <div className="mt-6">
           <span className="mb-2 inline-block rounded-full bg-indigo-500/20 px-3 py-1 text-xs font-medium text-indigo-300">
             {tv.name} · {tTv('season')} {season} · {t('episode')} {episode}
           </span>
