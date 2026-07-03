@@ -1,15 +1,31 @@
+'use client';
+
 import { useTranslations } from 'next-intl';
-import { Link } from '@/i18n/navigation';
+import { Link, usePathname } from '@/i18n/navigation';
 import LanguageSwitcher from './LanguageSwitcher';
 
 export default function Header() {
   const t = useTranslations('nav');
+  const pathname = usePathname();
 
   const navLinks = [
     { href: '/', label: t('home') },
     { href: '/movies', label: t('movies') },
     { href: '/tv', label: t('tv') },
   ];
+
+  function isActive(href: string) {
+    if (href === '/') {
+      return pathname === '/';
+    }
+    return pathname.startsWith(href);
+  }
+
+  const activeClass = 'rounded-lg px-4 py-2 text-sm font-medium bg-indigo-600/15 text-indigo-400';
+  const inactiveClass = 'rounded-lg px-4 py-2 text-sm font-medium text-gray-300 transition hover:bg-white/5 hover:text-white';
+
+  const activeMobileClass = 'rounded-lg px-3 py-1.5 text-sm font-medium bg-indigo-600/15 text-indigo-400';
+  const inactiveMobileClass = 'rounded-lg px-3 py-1.5 text-sm font-medium text-gray-400 transition hover:bg-white/5 hover:text-white';
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/5 bg-[#0a0a0f]/80 backdrop-blur-lg">
@@ -30,7 +46,7 @@ export default function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className="rounded-lg px-4 py-2 text-sm font-medium text-gray-300 transition hover:bg-white/5 hover:text-white"
+              className={isActive(link.href) ? activeClass : inactiveClass}
             >
               {link.label}
             </Link>
@@ -49,7 +65,7 @@ export default function Header() {
           <Link
             key={link.href}
             href={link.href}
-            className="rounded-lg px-3 py-1.5 text-sm font-medium text-gray-400 transition hover:bg-white/5 hover:text-white"
+            className={isActive(link.href) ? activeMobileClass : inactiveMobileClass}
           >
             {link.label}
           </Link>
