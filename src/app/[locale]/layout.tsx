@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
-import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import Header from '@/components/layout/Header';
@@ -62,9 +62,12 @@ export default async function LocaleLayout({
   // 启用静态渲染
   setRequestLocale(locale);
 
+  // 获取翻译消息（供客户端组件使用）
+  const messages = await getMessages();
+
   return (
     <div className="min-h-screen flex flex-col">
-      <NextIntlClientProvider>
+      <NextIntlClientProvider messages={messages}>
         <Header />
         <main className="flex-1">
           {children}

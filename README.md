@@ -6,7 +6,7 @@
 
 - **多语言 (i18n)**：基于 `next-intl`，支持中/英双语，URL 前缀路由（`/en`、`/zh`），SEO 友好
 - **ISR 增量静态再生**：上新新剧时按需刷新页面，无需全站重新构建
-- **每集独立页面**：`/tv/[id]/season-[s]/episode-[e]` 路由，每集都有独立 URL，利于 SEO 收录
+- **每集独立页面**：`/tv/[id]/season/[s]/episode/[e]` 路由，每集都有独立 URL，利于 SEO 收录
 - **SEO 全套**：metadata API（TDK）、Open Graph、Twitter Card、JSON-LD 结构化数据、sitemap.xml、robots.txt、hreflang 多语言标注
 - **TMDB 数据源**：对接 The Movie Database API，40+ 语言元数据
 - **广告位预留**：`AdSlot` 组件，后续接入 Google AdSense 即可
@@ -56,8 +56,10 @@ src/
 │   │   ├── movie/[id]/        # 电影详情页（ISR + JSON-LD）
 │   │   ├── tv/
 │   │   │   ├── [id]/          # 剧集详情页（ISR + 季/集列表）
-│   │   │   │   └── season-[s]/
-│   │   │   │       └── episode-[e]/  # 每集独立页面
+│   │   │   │   └── season/
+│   │   │   │       └── [s]/
+│   │   │   │           └── episode/
+│   │   │   │               └── [e]/  # 每集独立页面
 │   │   │   └── page.tsx       # 剧集列表页（分页）
 │   │   └── movies/
 │   │       └── page.tsx       # 电影列表页（分页）
@@ -68,7 +70,7 @@ src/
 │   └── not-found.tsx          # 404 页面
 ├── components/
 │   ├── layout/                # Header, Footer, LanguageSwitcher
-│   ├── media/                 # MediaCard, MediaGrid
+│   ├── media/                 # MediaCard, MediaGrid, MediaRail
 │   └── seo/                   # JsonLd, AdSlot
 ├── i18n/
 │   ├── routing.ts             # 语言配置
@@ -123,11 +125,70 @@ curl -X POST http://localhost:3000/api/revalidate \
 
 ## 📺 广告接入
 
-当前 `AdSlot` 组件是占位符。接入 Google AdSense 时：
+项目已预留 7 个广告位（首页×2、列表页×2、详情页×3、全局底部×1），通过 `AdSlot` 组件管理。
+未配置时显示占位区域，配置后自动切换为真实广告。
 
-1. 在 `src/app/[locale]/layout.tsx` 的 `<head>` 中添加 AdSense 脚本
-2. 将 `AdSlot` 组件内容替换为 `<ins className="adsbygoogle" ... />`
-3. 配置广告位 ID
+`AdSlot` 支持四种模式（按优先级自动选择）：
+
+| 模式 | 适用场景 | 配置方式 |
+|------|---------|---------|
+| **自定义广告** | 合作方直投、图片+链接 | 传入 `customHtml` 属性 |
+| **百度联盟** | 国内 Web 流量（首选） | 配置 `NEXT_PUBLIC_BAIDU_CPRO_ID` + 传入 `baiduSlotId` |
+| **Google AdSense** | 海外流量 | 配置 `NEXT_PUBLIC_ADSENSE_CLIENT` + 传入 `adsenseSlot` |
+| **占位模式** | 开发调试 | 不配置任何广告，显示占位框 |
+
+### 接入百度联盟（国内首选）
+
+百度联盟是国内 Web 站长最常用的广告平台，支持个人申请，JS 代码接入。
+
+1. 前往 [百度联盟](https://union.baidu.com) 注册账号
+2. 添加网站并通过审核（需 ICP 备案，日 IP 建议 ≥ 100）
+3. 在"媒体管理"中创建广告位，获取广告位 ID
+4. 在 `.env.local` 中配置：
+   ```bash
+   NEXT_PUBLIC_BAIDU_CPRO_ID=你的联盟ID
+   ```
+5. 在页面中传入 `baiduSlotId` 属性：
+   ```tsx
+   <AdSlot slotId="home-top" format="horizontal" baiduSlotId="1234567" />
+   ```
+
+### 接入 Google AdSense（海外流量）
+
+1. 前往 [Google AdSense](https://www.google.com/adsense) 注册账号，获取 Publisher ID（格式 `ca-pub-XXXXXXXXXXXXXXXX`）
+2. 在 `.env.local` 中配置：
+   ```bash
+   NEXT_PUBLIC_ADSENSE_CLIENT=ca-pub-XXXXXXXXXXXXXXXX
+   ```
+3. 在 AdSense 后台创建广告单元，获取 slot ID
+4. 在页面中传入 `adsenseSlot` 属性：
+   ```tsx
+   <AdSlot slotId="home-top" format="horizontal" adsenseSlot="1234567890" />
+   ```
+5. 将网站域名添加到 AdSense 后台，等待审核通过
+
+> 配置 `NEXT_PUBLIC_ADSENSE_CLIENT` 后，AdSense 脚本会自动在 `layout.tsx` 中加载，无需手动修改。
+
+### 自定义广告（合作方直投）
+
+直接传入 HTML 代码，适合与广告主直接合作：
+
+```tsx
+<AdSlot
+  slotId="home-top"
+  format="horizontal"
+  customHtml='<a href="https://example.com"><img src="/ads/banner.jpg" alt="广告" /></a>'
+/>
+```
+
+### 国内其他可选广告联盟
+
+| 平台 | 适合 Web 端 | 个人可申请 | 备注 |
+|------|:-----------:|:---------:|------|
+| **百度联盟** | ✅ | ✅ | 国内 Web 首选，需备案 |
+| **360 广告联盟** | ✅ | ✅ | 百度联盟的替代方案 |
+| **Google AdSense** | ✅ | ✅ | 海外流量收益更高 |
+| **穿山甲/优量汇/快手** | ❌ | ❌ | 仅支持 App SDK，需企业资质 |
 
 ## 🚢 部署
 
