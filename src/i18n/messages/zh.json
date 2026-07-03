@@ -11,7 +11,9 @@
     "popularMovies": "热门电影",
     "popularTV": "热门电视剧",
     "trending": "正在流行",
-    "topRated": "最高评分"
+    "topRated": "最高评分",
+    "topPicks": "为你推荐",
+    "viewDetails": "查看详情"
   },
   "movie": {
     "overview": "剧情简介",

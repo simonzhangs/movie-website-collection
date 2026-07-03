@@ -224,6 +224,33 @@ export async function getTrending(
   return tmdbFetchWithFallback(`/trending/all/${timeWindow}`, locale, {}, mockTrending);
 }
 
+/**
+ * 获取"为你推荐"混合列表 — 高分电影 + 高分剧集，按评分降序排列
+ */
+export async function getTopPicks(
+  locale: string = 'en',
+  limit: number = 12
+): Promise<TMDBMediaItem[]> {
+  const [topMovies, topTV] = await Promise.all([
+    getTopRatedMovies(locale, 1),
+    getTopRatedTV(locale, 1),
+  ]);
+
+  const movies = topMovies.results.slice(0, limit).map((item) => ({
+    ...item,
+    media_type: 'movie' as const,
+  }));
+  const tvShows = topTV.results.slice(0, limit).map((item) => ({
+    ...item,
+    media_type: 'tv' as const,
+  }));
+
+  // 合并并按评分降序排列
+  return [...movies, ...tvShows]
+    .sort((a, b) => b.vote_average - a.vote_average)
+    .slice(0, limit);
+}
+
 // ─── 辅助函数 ───
 
 export { getImageUrl };

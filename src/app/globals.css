@@ -84,6 +84,22 @@ a {
   }
 }
 
+/* 横向滚动轨道 */
+.rail-scroll {
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: #333344 #111118;
+}
+
+.rail-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+.rail-item {
+  scroll-snap-align: start;
+}
+
 /* 骨架屏动画 */
 @keyframes shimmer {
   0% { background-position: -200% 0; }

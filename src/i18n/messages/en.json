@@ -11,7 +11,9 @@
     "popularMovies": "Popular Movies",
     "popularTV": "Popular TV Shows",
     "trending": "Trending Now",
-    "topRated": "Top Rated"
+    "topRated": "Top Rated",
+    "topPicks": "Top Picks for You",
+    "viewDetails": "View Details"
   },
   "movie": {
     "overview": "Overview",
