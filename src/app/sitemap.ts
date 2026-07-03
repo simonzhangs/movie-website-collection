@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { routing } from '@/i18n/routing';
-import { getPopularMovies, getPopularTV, getTVDetails } from '@/lib/tmdb/client';
+import { getPopularMovies, getPopularTV } from '@/lib/tmdb/client';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
@@ -8,7 +8,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const entries: MetadataRoute.Sitemap = [];
 
   // ─── 静态页面（每种语言）───
-  const staticPaths = ['', '/movies', '/tv'];
+  const staticPaths = ['', '/movies', '/tv', '/search'];
 
   for (const locale of routing.locales) {
     for (const path of staticPaths) {
@@ -26,61 +26,50 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   }
 
-  // ─── 动态页面：热门电影、剧集、每集 ───
-  try {
-    const [movies, tvShows] = await Promise.all([
-      getPopularMovies('en', 1),
-      getPopularTV('en', 1),
+  // ─── 动态页面（用 timeout 保护） ───
+  // 如果 TMDB API 在构建时不可用，跳过动态页面
+  const fetchWithTimeout = <T>(promise: Promise<T>, timeoutMs: number): Promise<T | null> =>
+    Promise.race([
+      promise,
+      new Promise<null>((resolve) => setTimeout(() => resolve(null), timeoutMs)),
     ]);
 
-    for (const locale of routing.locales) {
-      // 电影详情页
-      for (const movie of movies.results) {
-        entries.push({
-          url: `${SITE_URL}/${locale}/movie/${movie.id}`,
-          lastModified: new Date(),
-          changeFrequency: 'weekly',
-          priority: 0.6,
-          alternates: {
-            languages: Object.fromEntries(
-              routing.locales.map((l) => [l, `${SITE_URL}/${l}/movie/${movie.id}`])
-            ),
-          },
-        });
+  try {
+    const movies = await fetchWithTimeout(getPopularMovies('en', 1), 10000);
+
+    if (movies) {
+      for (const locale of routing.locales) {
+        for (const movie of movies.results.slice(0, 20)) {
+          entries.push({
+            url: `${SITE_URL}/${locale}/movie/${movie.id}`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
+            priority: 0.6,
+            alternates: {
+              languages: Object.fromEntries(
+                routing.locales.map((l) => [l, `${SITE_URL}/${l}/movie/${movie.id}`])
+              ),
+            },
+          });
+        }
       }
+    }
 
-      // 剧集详情页 + 每集页面
-      const tvList = tvShows.results.slice(0, 10); // 前 10 部热门剧集
-      for (const tv of tvList) {
-        // 剧集详情页
-        entries.push({
-          url: `${SITE_URL}/${locale}/tv/${tv.id}`,
-          lastModified: new Date(),
-          changeFrequency: 'weekly',
-          priority: 0.6,
-          alternates: {
-            languages: Object.fromEntries(
-              routing.locales.map((l) => [l, `${SITE_URL}/${l}/tv/${tv.id}`])
-            ),
-          },
-        });
-
-        // 获取剧集详情，生成每集 URL
-        try {
-          const tvDetails = await getTVDetails(String(tv.id), locale);
-          for (const season of tvDetails.seasons) {
-            if (season.season_number <= 0) continue; // 跳过特别篇
-            for (let ep = 1; ep <= season.episode_count; ep++) {
-              entries.push({
-                url: `${SITE_URL}/${locale}/tv/${tv.id}/season/${season.season_number}/episode/${ep}`,
-                lastModified: new Date(),
-                changeFrequency: 'monthly',
-                priority: 0.4,
-              });
-            }
-          }
-        } catch {
-          // 单部剧集详情获取失败，跳过该剧集
+    const tvShows = await fetchWithTimeout(getPopularTV('en', 1), 10000);
+    if (tvShows) {
+      for (const locale of routing.locales) {
+        for (const tv of tvShows.results.slice(0, 20)) {
+          entries.push({
+            url: `${SITE_URL}/${locale}/tv/${tv.id}`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
+            priority: 0.6,
+            alternates: {
+              languages: Object.fromEntries(
+                routing.locales.map((l) => [l, `${SITE_URL}/${l}/tv/${tv.id}`])
+              ),
+            },
+          });
         }
       }
     }
