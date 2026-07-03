@@ -25,7 +25,13 @@
     "status": "状态",
     "genres": "类型",
     "rating": "评分",
-    "minutes": "分钟"
+    "minutes": "分钟",
+    "faqWhereWatch": "在哪里可以观看《{title}》完整版？",
+    "faqWhereWatchAnswer": "您当前正在浏览《{title}》的详细信息页面。全看(FullWatch)提供最新的影视信息聚合，您可以免费查看完整的剧情介绍、演员阵容和评分信息。",
+    "faqIsFree": "《{title}》可以免费在线观看吗？",
+    "faqIsFreeAnswer": "全看(FullWatch)是一个免费的影视信息聚合平台，提供电影和电视剧的详细信息、剧情介绍和演员表。本站不提供视频播放服务，仅提供影视信息导航。",
+    "faqCast": "《{title}》的主要演员有哪些？",
+    "faqCastAnswer": "您可以在当前页面的演员阵容区域查看《{title}》的主要演员信息，包括演员表、角色名称和人物海报。"
   },
   "tv": {
     "overview": "剧情简介",
@@ -40,7 +46,13 @@
     "season": "第",
     "episode": "集",
     "episodeList": "剧集列表",
-    "viewEpisodes": "查看剧集"
+    "viewEpisodes": "查看剧集",
+    "faqWhereWatch": "在哪里可以观看《{name}》完整版？",
+    "faqWhereWatchAnswer": "您当前正在浏览《{name}》的详细信息页面。全看(FullWatch)提供最新的影视信息聚合，您可以免费查看完整的剧情介绍、季集列表和评分信息。",
+    "faqIsFree": "《{name}》可以免费在线观看吗？",
+    "faqIsFreeAnswer": "全看(FullWatch)是一个免费的影视信息聚合平台，提供电影和电视剧的详细信息、剧情介绍和演员表。本站不提供视频播放服务，仅提供影视信息导航。",
+    "faqSeasons": "《{name}》有多少季？",
+    "faqSeasonsAnswer": "您可以在当前页面的季数区域查看《{name}》所有季的详细信息，点击任意季可查看该季全部剧集列表。"
   },
   "episode": {
     "overview": "本集简介",
@@ -49,7 +61,11 @@
     "season": "第",
     "episode": "集",
     "minutes": "分钟",
-    "backToShow": "返回剧集"
+    "backToShow": "返回剧集",
+    "faqEpisode": "这是第几集？",
+    "faqEpisodeAnswer": "这是《{showName}》第{season}季第{episode}集，标题为《{name}》。",
+    "faqNextEpisode": "下一集是什么？",
+    "faqNextEpisodeAnswer": "您可以使用页面底部的导航按钮跳转到下一集，或返回剧集总览页面选择任意集数。"
   },
   "listing": {
     "page": "第",

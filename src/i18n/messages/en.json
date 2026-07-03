@@ -25,7 +25,13 @@
     "status": "Status",
     "genres": "Genres",
     "rating": "Rating",
-    "minutes": "min"
+    "minutes": "min",
+    "faqWhereWatch": "Where can I watch {title} full version?",
+    "faqWhereWatchAnswer": "You are currently browsing the details page for {title}. FullWatch provides the latest movie and TV show information aggregation, where you can free view complete plot summaries, cast info, and ratings.",
+    "faqIsFree": "Is {title} available to watch online for free?",
+    "faqIsFreeAnswer": "FullWatch is a free movie and TV show information aggregation platform that provides detailed information, plot summaries, and cast lists. We do not provide video playback services, only information navigation.",
+    "faqCast": "Who are the main cast members of {title}?",
+    "faqCastAnswer": "You can view the main cast information for {title} in the Cast section on this page, including actor names, character roles, and profile photos."
   },
   "tv": {
     "overview": "Overview",
@@ -40,7 +46,13 @@
     "season": "Season",
     "episode": "Episode",
     "episodeList": "Episode List",
-    "viewEpisodes": "View Episodes"
+    "viewEpisodes": "View Episodes",
+    "faqWhereWatch": "Where can I watch {name} full version online?",
+    "faqWhereWatchAnswer": "You are currently browsing the details page for {name}. FullWatch provides the latest TV show information aggregation, where you can free view complete plot summaries, season lists, and ratings.",
+    "faqIsFree": "Is {name} available to watch online for free?",
+    "faqIsFreeAnswer": "FullWatch is a free movie and TV show information aggregation platform that provides detailed information, plot summaries, and cast lists. We do not provide video playback services, only information navigation.",
+    "faqSeasons": "How many seasons does {name} have?",
+    "faqSeasonsAnswer": "You can view all seasons of {name} in the Seasons section on this page. Click any season to see the full episode list for that season."
   },
   "episode": {
     "overview": "Episode Overview",
@@ -49,7 +61,11 @@
     "season": "Season",
     "episode": "Episode",
     "minutes": "min",
-    "backToShow": "Back to Show"
+    "backToShow": "Back to Show",
+    "faqEpisode": "Which episode is this?",
+    "faqEpisodeAnswer": "This is Season {season}, Episode {episode} of {showName}, titled '{name}'.",
+    "faqNextEpisode": "What is the next episode?",
+    "faqNextEpisodeAnswer": "You can use the navigation buttons at the bottom of the page to jump to the next episode, or return to the show overview to select any episode."
   },
   "listing": {
     "page": "Page",

@@ -4,6 +4,7 @@ import { getTVDetails, getEpisodeDetails, getImageUrl } from '@/lib/tmdb/client'
 import { episodeMetadata, episodeJsonLd } from '@/lib/seo/metadata';
 import JsonLd from '@/components/seo/JsonLd';
 import Breadcrumb from '@/components/seo/Breadcrumb';
+import FaqSection from '@/components/seo/FaqSection';
 import AdSlot from '@/components/seo/AdSlot';
 import { Link } from '@/i18n/navigation';
 import type { Metadata } from 'next';
@@ -145,6 +146,27 @@ const tNav = await getTranslations('nav');
         {/* ─── 广告位 ─── */}
         <div className="mt-8">
           <AdSlot slotId="episode-detail" format="horizontal" />
+        </div>
+
+        {/* ─── FAQ ─── */}
+        <div className="mt-10">
+          <FaqSection
+            items={[
+              {
+                question: t('faqEpisode'),
+                answer: t('faqEpisodeAnswer', {
+                  showName: tv.name,
+                  season,
+                  episode,
+                  name: episodeData.name,
+                }),
+              },
+              {
+                question: t('faqNextEpisode'),
+                answer: t('faqNextEpisodeAnswer'),
+              },
+            ]}
+          />
         </div>
 
         {/* ─── 上一集 / 下一集 导航 ─── */}

@@ -4,6 +4,7 @@ import { getMovieDetails, getSimilarMovies, getImageUrl, getPopularMovieIds } fr
 import { movieMetadata, movieJsonLd } from '@/lib/seo/metadata';
 import JsonLd from '@/components/seo/JsonLd';
 import Breadcrumb from '@/components/seo/Breadcrumb';
+import FaqSection from '@/components/seo/FaqSection';
 import AdSlot from '@/components/seo/AdSlot';
 import MediaGrid from '@/components/media/MediaGrid';
 import type { Metadata } from 'next';
@@ -161,6 +162,26 @@ export default async function MovieDetailPage({ params }: MoviePageProps) {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mt-8">
           <AdSlot slotId="movie-detail" format="horizontal" />
+        </div>
+
+        {/* ─── FAQ ─── */}
+        <div className="mt-10">
+          <FaqSection
+            items={[
+              {
+                question: t('faqWhereWatch', { title: movie.title }),
+                answer: t('faqWhereWatchAnswer', { title: movie.title }),
+              },
+              {
+                question: t('faqIsFree', { title: movie.title }),
+                answer: t('faqIsFreeAnswer'),
+              },
+              {
+                question: t('faqCast', { title: movie.title }),
+                answer: t('faqCastAnswer', { title: movie.title }),
+              },
+            ]}
+          />
         </div>
 
         {/* ─── 相似电影 ─── */}

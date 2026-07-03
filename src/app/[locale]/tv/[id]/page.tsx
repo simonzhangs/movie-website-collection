@@ -4,6 +4,7 @@ import { getTVDetails, getSimilarTV, getImageUrl, getPopularTVIds } from '@/lib/
 import { tvMetadata, tvJsonLd } from '@/lib/seo/metadata';
 import JsonLd from '@/components/seo/JsonLd';
 import Breadcrumb from '@/components/seo/Breadcrumb';
+import FaqSection from '@/components/seo/FaqSection';
 import AdSlot from '@/components/seo/AdSlot';
 import MediaGrid from '@/components/media/MediaGrid';
 import { Link } from '@/i18n/navigation';
@@ -214,6 +215,26 @@ export default async function TVDetailPage({ params }: TVPageProps) {
               ))}
           </div>
         </section>
+
+        {/* ─── FAQ ─── */}
+        <div className="mt-10">
+          <FaqSection
+            items={[
+              {
+                question: t('faqWhereWatch', { name: tv.name }),
+                answer: t('faqWhereWatchAnswer', { name: tv.name }),
+              },
+              {
+                question: t('faqIsFree', { name: tv.name }),
+                answer: t('faqIsFreeAnswer'),
+              },
+              {
+                question: t('faqSeasons', { name: tv.name }),
+                answer: t('faqSeasonsAnswer', { name: tv.name }),
+              },
+            ]}
+          />
+        </div>
 
         {/* ─── 相似剧集 ─── */}
         {similar.results.length > 0 && (
