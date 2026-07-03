@@ -61,7 +61,9 @@
     "search": "Search...",
     "noResults": "No results found",
     "error": "Something went wrong",
-    "advertisement": "Advertisement"
+    "advertisement": "Advertisement",
+    "viewAll": "View all",
+    "noOverview": "No overview available."
   },
   "notFound": {
     "title": "Page Not Found",

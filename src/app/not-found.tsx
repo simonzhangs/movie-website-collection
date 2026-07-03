@@ -4,9 +4,12 @@ export default function NotFound() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center px-4 text-center">
       <h1 className="text-6xl font-bold gradient-text">404</h1>
-      <p className="mt-4 text-xl text-gray-400">Page not found</p>
+      <p className="mt-4 text-xl text-gray-400">Page not found / 页面未找到</p>
       <p className="mt-2 text-sm text-gray-500">
         The page you are looking for doesn&apos;t exist or has been moved.
+      </p>
+      <p className="mt-1 text-sm text-gray-500">
+        您访问的页面不存在或已被移动。
       </p>
       <div className="mt-8 flex gap-4">
         <Link

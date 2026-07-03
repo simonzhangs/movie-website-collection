@@ -1,3 +1,4 @@
+import { getTranslations } from 'next-intl/server';
 import MediaCard from './MediaCard';
 import type { TMDBMediaItem } from '@/lib/tmdb/types';
 
@@ -6,11 +7,13 @@ interface MediaGridProps {
   mediaType?: 'movie' | 'tv';
 }
 
-export default function MediaGrid({ items, mediaType }: MediaGridProps) {
+export default async function MediaGrid({ items, mediaType }: MediaGridProps) {
+  const tCommon = await getTranslations('common');
+
   if (!items || items.length === 0) {
     return (
       <div className="flex h-40 items-center justify-center text-gray-500">
-        No results found
+        {tCommon('noResults')}
       </div>
     );
   }

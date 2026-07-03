@@ -38,6 +38,7 @@ export default async function TVDetailPage({ params }: TVPageProps) {
   setRequestLocale(locale);
 
   const t = await getTranslations('tv');
+  const tCommon = await getTranslations('common');
 
   let tv;
   let similar;
@@ -130,7 +131,7 @@ export default async function TVDetailPage({ params }: TVPageProps) {
             <div className="mt-6">
               <h2 className="mb-2 text-lg font-semibold text-white">{t('overview')}</h2>
               <p className="leading-relaxed text-gray-300">
-                {tv.overview || 'No overview available.'}
+                {tv.overview || tCommon('noOverview')}
               </p>
             </div>
           </div>

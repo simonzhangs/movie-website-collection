@@ -61,7 +61,9 @@
     "search": "搜索...",
     "noResults": "未找到结果",
     "error": "出错了",
-    "advertisement": "广告"
+    "advertisement": "广告",
+    "viewAll": "查看全部",
+    "noOverview": "暂无简介。"
   },
   "notFound": {
     "title": "页面未找到",

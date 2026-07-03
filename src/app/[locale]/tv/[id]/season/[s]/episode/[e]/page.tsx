@@ -42,6 +42,7 @@ export default async function EpisodePage({ params }: EpisodePageProps) {
 
   const t = await getTranslations('episode');
   const tTv = await getTranslations('tv');
+const tCommon = await getTranslations('common');
 
   let tv;
   let episodeData;
@@ -130,7 +131,7 @@ export default async function EpisodePage({ params }: EpisodePageProps) {
         <div className="mt-6">
           <h2 className="mb-2 text-lg font-semibold text-white">{t('overview')}</h2>
           <p className="leading-relaxed text-gray-300">
-            {episodeData.overview || 'No overview available.'}
+            {episodeData.overview || tCommon('noOverview')}
           </p>
         </div>
 

@@ -14,6 +14,7 @@ export default async function HomePage({ params }: HomePageProps) {
   setRequestLocale(locale);
 
   const t = await getTranslations('home');
+  const tCommon = await getTranslations('common');
 
   // 并行获取首页数据
   const [trending, popularMovies, popularTV] = await Promise.all([
@@ -89,12 +90,12 @@ export default async function HomePage({ params }: HomePageProps) {
       </div>
 
       {/* ─── Trending ─── */}
-      <Section title={t('trending')} href="/movies">
+      <Section title={t('trending')} href="/movies" viewAllText={tCommon('viewAll')}>
         <MediaGrid items={trending.results.slice(0, 12)} />
       </Section>
 
       {/* ─── Popular Movies ─── */}
-      <Section title={t('popularMovies')} href="/movies">
+      <Section title={t('popularMovies')} href="/movies" viewAllText={tCommon('viewAll')}>
         <MediaGrid items={popularMovies.results.slice(0, 12)} mediaType="movie" />
       </Section>
 
@@ -104,7 +105,7 @@ export default async function HomePage({ params }: HomePageProps) {
       </div>
 
       {/* ─── Popular TV ─── */}
-      <Section title={t('popularTV')} href="/tv">
+      <Section title={t('popularTV')} href="/tv" viewAllText={tCommon('viewAll')}>
         <MediaGrid items={popularTV.results.slice(0, 12)} mediaType="tv" />
       </Section>
     </div>
@@ -114,10 +115,12 @@ export default async function HomePage({ params }: HomePageProps) {
 function Section({
   title,
   href,
+  viewAllText,
   children,
 }: {
   title: string;
   href: string;
+  viewAllText: string;
   children: React.ReactNode;
 }) {
   return (
@@ -128,7 +131,7 @@ function Section({
           href={href}
           className="flex items-center gap-1 text-sm text-indigo-400 transition hover:text-indigo-300"
         >
-          <span>View all</span>
+          <span>{viewAllText}</span>
           <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>

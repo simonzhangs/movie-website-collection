@@ -36,6 +36,7 @@ export default async function MovieDetailPage({ params }: MoviePageProps) {
   setRequestLocale(locale);
 
   const t = await getTranslations('movie');
+  const tCommon = await getTranslations('common');
 
   let movie;
   let similar;
@@ -130,7 +131,7 @@ export default async function MovieDetailPage({ params }: MoviePageProps) {
             <div className="mt-6">
               <h2 className="mb-2 text-lg font-semibold text-white">{t('overview')}</h2>
               <p className="leading-relaxed text-gray-300">
-                {movie.overview || 'No overview available.'}
+                {movie.overview || tCommon('noOverview')}
               </p>
             </div>
           </div>
