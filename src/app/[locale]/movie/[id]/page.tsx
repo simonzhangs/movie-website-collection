@@ -24,8 +24,11 @@ export async function generateMetadata({
 }: MoviePageProps): Promise<Metadata> {
   const { id, locale } = await params;
   try {
-    const movie = await getMovieDetails(id, locale);
-    return movieMetadata(movie, locale);
+    const [movie, tSeo] = await Promise.all([
+      getMovieDetails(id, locale),
+      getTranslations({ locale, namespace: 'seo' }),
+    ]);
+    return movieMetadata(movie, locale, tSeo);
   } catch {
     return { title: 'Movie' };
   }

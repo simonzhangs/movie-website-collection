@@ -73,10 +73,31 @@
     "backHome": "Back to Home"
   },
   "seo": {
-    "siteName": "CinePedia",
-    "siteDescription": "Discover comprehensive information about movies and TV shows, including episode guides, cast, reviews and more.",
-    "movieSuffix": " - Movie Guide",
-    "tvSuffix": " - TV Show Guide",
-    "episodeSuffix": " - Episode Guide"
+    "siteName": "FullWatch",
+    "siteDescription": "Watch movies and TV shows online free in full version. Every episode with detailed guides, cast, reviews and more.",
+    "movieSuffix": " - Watch Online Free | Full Version",
+    "tvSuffix": " - Watch Online Free | Complete Series",
+    "episodeSuffix": " - Watch Online Free | Full Episode",
+    "keywords": {
+      "watchOnline": "watch online",
+      "fullVersion": "full version",
+      "free": "free",
+      "complete": "complete",
+      "episode": "episode",
+      "movie": "movie",
+      "tvShow": "TV show"
+    },
+    "movieTitle": "{name} ({year}) - Watch Online Free | Full Version",
+    "movieDescription": "Watch {name} ({year}) online free in full version. {overview} Watch now on FullWatch.",
+    "tvTitle": "{name} ({year}) - Watch Online Free | Complete Series",
+    "tvDescription": "Watch {name} ({year}) online free. Complete series with {seasons} seasons and {episodes} episodes. {overview}",
+    "episodeTitle": "{showName} S{season}E{episode} - {name} | Watch Online Free",
+    "episodeDescription": "Watch {showName} Season {season} Episode {episode} - {name} online free. {overview}",
+    "homeTitle": "FullWatch - Watch Movies & TV Shows Online Free | Full Version",
+    "homeDescription": "FullWatch offers latest movies and TV shows to watch online free in full version. Every episode with detailed guides, cast, reviews and more.",
+    "moviesListTitle": "Popular Movies - Watch Online Free | Full Version | FullWatch",
+    "moviesListDescription": "Browse popular movies and watch online free in full version. Latest blockbusters, classics, and top rated films.",
+    "tvListTitle": "Popular TV Shows - Watch Online Free | Complete Series | FullWatch",
+    "tvListDescription": "Browse popular TV shows and watch online free. Complete series with all episodes, detailed guides and reviews."
   }
 }

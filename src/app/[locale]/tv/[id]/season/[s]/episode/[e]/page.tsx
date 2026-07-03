@@ -22,11 +22,12 @@ export async function generateMetadata({
   if (isNaN(season) || isNaN(episode)) return { title: 'Episode' };
 
   try {
-    const [tv, episodeData] = await Promise.all([
+    const [tv, episodeData, tSeo] = await Promise.all([
       getTVDetails(id, locale),
       getEpisodeDetails(id, season, episode, locale),
+      getTranslations({ locale, namespace: 'seo' }),
     ]);
-    return episodeMetadata(episodeData, tv.name, id, season, locale);
+    return episodeMetadata(episodeData, tv.name, id, season, locale, tSeo);
   } catch {
     return { title: 'Episode' };
   }

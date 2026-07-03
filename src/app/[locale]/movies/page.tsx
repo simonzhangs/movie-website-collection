@@ -14,10 +14,10 @@ export async function generateMetadata({
   params,
 }: MoviesPageProps): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'home' });
+  const t = await getTranslations({ locale, namespace: 'seo' });
   return {
-    title: t('popularMovies'),
-    description: t('subtitle'),
+    title: t('moviesListTitle'),
+    description: t('moviesListDescription'),
   };
 }
 

@@ -12,10 +12,10 @@ export default function Footer() {
           {/* Logo + desc */}
           <div className="flex flex-col items-center gap-2 md:items-start">
             <Link href="/" className="flex items-center gap-2">
-              <span className="text-lg font-bold gradient-text">CinePedia</span>
+              <span className="text-lg font-bold gradient-text">FullWatch</span>
             </Link>
             <p className="text-sm text-gray-500">
-              © {year} CinePedia. Powered by TMDB.
+              © {year} FullWatch. Powered by TMDB.
             </p>
           </div>
 

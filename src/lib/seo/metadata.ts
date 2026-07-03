@@ -5,11 +5,29 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 const IMAGE_BASE = process.env.TMDB_IMAGE_BASE_URL || 'https://image.tmdb.org/t/p';
 
 /**
- * 生成电影的 SEO metadata
+ * 截断文本到指定长度
  */
-export function movieMetadata(movie: TMDBMovie, locale: string): Metadata {
-  const title = `${movie.title} (${movie.release_date?.split('-')[0] ?? ''})`;
-  const description = movie.overview?.slice(0, 160) || movie.tagline || title;
+function truncate(text: string, maxLen: number): string {
+  if (text.length <= maxLen) return text;
+  return text.slice(0, maxLen - 3) + '...';
+}
+
+// ─── 电影详情页 ───
+
+export function movieMetadata(
+  movie: TMDBMovie,
+  locale: string,
+  t: (key: string, variables?: Record<string, string | number>) => string
+): Metadata {
+  const year = movie.release_date?.split('-')[0] ?? '';
+  const vars = {
+    name: movie.title,
+    year,
+    overview: truncate(movie.overview ?? '', 120),
+  };
+
+  const title = t('movieTitle', vars);
+  const description = t('movieDescription', vars);
 
   return {
     title,
@@ -42,12 +60,24 @@ export function movieMetadata(movie: TMDBMovie, locale: string): Metadata {
   };
 }
 
-/**
- * 生成电视剧的 SEO metadata
- */
-export function tvMetadata(tv: TMDBTVShow, locale: string): Metadata {
-  const title = `${tv.name} (${tv.first_air_date?.split('-')[0] ?? ''})`;
-  const description = tv.overview?.slice(0, 160) || tv.tagline || title;
+// ─── 剧集详情页 ───
+
+export function tvMetadata(
+  tv: TMDBTVShow,
+  locale: string,
+  t: (key: string, variables?: Record<string, string | number>) => string
+): Metadata {
+  const year = tv.first_air_date?.split('-')[0] ?? '';
+  const vars = {
+    name: tv.name,
+    year,
+    seasons: tv.number_of_seasons,
+    episodes: tv.number_of_episodes,
+    overview: truncate(tv.overview ?? '', 100),
+  };
+
+  const title = t('tvTitle', vars);
+  const description = t('tvDescription', vars);
 
   return {
     title,
@@ -80,18 +110,26 @@ export function tvMetadata(tv: TMDBTVShow, locale: string): Metadata {
   };
 }
 
-/**
- * 生成单集的 SEO metadata
- */
+// ─── 单集页面 ───
+
 export function episodeMetadata(
   episode: TMDBEpisode,
   tvName: string,
   tvId: string,
   seasonNumber: number,
-  locale: string
+  locale: string,
+  t: (key: string, variables?: Record<string, string | number>) => string
 ): Metadata {
-  const title = `${tvName} S${seasonNumber}E${episode.episode_number} - ${episode.name}`;
-  const description = episode.overview?.slice(0, 160) || title;
+  const vars = {
+    showName: tvName,
+    season: seasonNumber,
+    episode: episode.episode_number,
+    name: episode.name,
+    overview: truncate(episode.overview ?? '', 100),
+  };
+
+  const title = t('episodeTitle', vars);
+  const description = t('episodeDescription', vars);
 
   return {
     title,
@@ -117,9 +155,8 @@ export function episodeMetadata(
   };
 }
 
-/**
- * JSON-LD 结构化数据 - 电影
- */
+// ─── JSON-LD 结构化数据 ───
+
 export function movieJsonLd(movie: TMDBMovie) {
   return {
     '@context': 'https://schema.org',
@@ -142,9 +179,6 @@ export function movieJsonLd(movie: TMDBMovie) {
   };
 }
 
-/**
- * JSON-LD 结构化数据 - 电视剧
- */
 export function tvJsonLd(tv: TMDBTVShow) {
   return {
     '@context': 'https://schema.org',
@@ -168,9 +202,6 @@ export function tvJsonLd(tv: TMDBTVShow) {
   };
 }
 
-/**
- * JSON-LD 结构化数据 - 单集
- */
 export function episodeJsonLd(
   episode: TMDBEpisode,
   tvName: string,

@@ -4,10 +4,22 @@ import MediaGrid from '@/components/media/MediaGrid';
 import MediaRail from '@/components/media/MediaRail';
 import AdSlot from '@/components/seo/AdSlot';
 import { Link } from '@/i18n/navigation';
+import type { Metadata } from 'next';
 import type { TMDBMediaItem } from '@/lib/tmdb/types';
 
 interface HomePageProps {
   params: Promise<{ locale: string }>;
+}
+
+export async function generateMetadata({
+  params,
+}: HomePageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'seo' });
+  return {
+    title: t('homeTitle'),
+    description: t('homeDescription'),
+  };
 }
 
 export default async function HomePage({ params }: HomePageProps) {

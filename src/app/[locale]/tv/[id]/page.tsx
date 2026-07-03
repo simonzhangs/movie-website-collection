@@ -26,8 +26,11 @@ export async function generateMetadata({
 }: TVPageProps): Promise<Metadata> {
   const { id, locale } = await params;
   try {
-    const tv = await getTVDetails(id, locale);
-    return tvMetadata(tv, locale);
+    const [tv, tSeo] = await Promise.all([
+      getTVDetails(id, locale),
+      getTranslations({ locale, namespace: 'seo' }),
+    ]);
+    return tvMetadata(tv, locale, tSeo);
   } catch {
     return { title: 'TV Show' };
   }

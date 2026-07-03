@@ -14,10 +14,10 @@ export async function generateMetadata({
   params,
 }: TVListPageProps): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'home' });
+  const t = await getTranslations({ locale, namespace: 'seo' });
   return {
-    title: t('popularTV'),
-    description: t('subtitle'),
+    title: t('tvListTitle'),
+    description: t('tvListDescription'),
   };
 }
 

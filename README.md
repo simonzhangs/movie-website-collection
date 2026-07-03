@@ -1,4 +1,4 @@
-# CinePedia - 影视资源介绍网站
+# FullWatch - 影视资源介绍网站
 
 基于 **Next.js 15 (App Router) + next-intl + TMDB API** 构建的影视介绍网站，支持多语言、SSR/ISR、SEO 优化和广告位预留。
 

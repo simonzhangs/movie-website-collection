@@ -73,10 +73,31 @@
     "backHome": "回到首页"
   },
   "seo": {
-    "siteName": "影视百科",
-    "siteDescription": "发现电影和电视剧的全面信息，包含剧集指南、演员阵容、评论等。",
-    "movieSuffix": " - 电影指南",
-    "tvSuffix": " - 电视剧指南",
-    "episodeSuffix": " - 分集指南"
+    "siteName": "全看",
+    "siteDescription": "在线观看电影电视剧完整版，免费查看每集剧情介绍、演员阵容、评论等详细信息。",
+    "movieSuffix": " - 在线观看完整版 | 免费观看",
+    "tvSuffix": " - 全集在线观看 | 完整版",
+    "episodeSuffix": " - 在线观看 | 完整版",
+    "keywords": {
+      "watchOnline": "在线观看",
+      "fullVersion": "完整版",
+      "free": "免费",
+      "complete": "全集",
+      "episode": "集",
+      "movie": "电影",
+      "tvShow": "电视剧"
+    },
+    "movieTitle": "{name} ({year}) - 在线观看完整版 | 免费观看",
+    "movieDescription": "在线观看《{name}》({year})完整版，免费查看。{overview} 尽在全看 FullWatch。",
+    "tvTitle": "{name} ({year}) - 全集在线观看 | 完整版",
+    "tvDescription": "在线观看《{name}》({year})完整版，共{seasons}季{episodes}集。{overview}",
+    "episodeTitle": "{showName} 第{season}季第{episode}集 - {name} | 在线观看完整版",
+    "episodeDescription": "在线观看《{showName}》第{season}季第{episode}集 - {name}，完整版免费查看。{overview}",
+    "homeTitle": "全看 FullWatch - 在线观看电影电视剧完整版 | 免费查看",
+    "homeDescription": "全看提供最新热门电影、电视剧在线观看，完整版免费查看，包含每集详细剧情介绍、演员阵容、评论等。",
+    "moviesListTitle": "热门电影 - 在线观看完整版 | 免费观看 | 全看",
+    "moviesListDescription": "浏览热门电影，在线观看完整版免费查看。最新大片、经典影片、高分电影一网打尽。",
+    "tvListTitle": "热门电视剧 - 全集在线观看 | 完整版 | 全看",
+    "tvListDescription": "浏览热门电视剧，全集在线观看。完整版所有集数，详细剧情介绍和评论。"
   }
 }

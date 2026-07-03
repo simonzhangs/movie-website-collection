@@ -1,4 +1,4 @@
-# CinePedia 项目指南
+# FullWatch 项目指南
 
 > 最后更新：2026-06-30
 > 项目路径：`/Users/fegarden/movie-website-collection`
