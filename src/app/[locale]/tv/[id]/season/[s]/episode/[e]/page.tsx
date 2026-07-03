@@ -62,20 +62,23 @@ export default async function EpisodePage({ params }: EpisodePageProps) {
     <div>
       <JsonLd data={episodeJsonLd(episodeData, tv.name, id, season)} />
 
-      {/* ─── Hero / Still ─── */}
-      <section className="relative h-[35vh] min-h-[250px] w-full overflow-hidden">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={getImageUrl(episodeData.still_path || tv.backdrop_path, 'original')}
-          alt={`${tv.name} S${season}E${episode} - ${episodeData.name}`}
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/50 to-transparent" />
-      </section>
+      {/* ─── Hero + 内容 ─── */}
+      <section className="relative">
+        {/* 背景图（绝对定位，作为底层背景） */}
+        <div className="absolute inset-x-0 top-0 h-[45vh] min-h-[300px] overflow-hidden">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={getImageUrl(episodeData.still_path || tv.backdrop_path, 'original')}
+            alt={`${tv.name} S${season}E${episode} - ${episodeData.name}`}
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/60 to-[#0a0a0f]/20" />
+        </div>
 
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        {/* ─── 面包屑 ─── */}
-        <nav className="-mt-20 flex items-center gap-2 text-sm text-gray-400">
+        {/* 内容区（通过 padding-top 自然沉底，不遮挡 Hero） */}
+        <div className="relative mx-auto max-w-4xl px-4 pt-[30vh] sm:px-6 lg:px-8 min-h-[300px]">
+          {/* ─── 面包屑 ─── */}
+          <nav className="flex items-center gap-2 text-sm text-gray-400">
           <Link href={`/tv/${id}`} className="transition hover:text-indigo-400">
             {tv.name}
           </Link>
@@ -173,6 +176,7 @@ export default async function EpisodePage({ params }: EpisodePageProps) {
           </Link>
         </div>
       </div>
+      </section>
     </div>
   );
 }

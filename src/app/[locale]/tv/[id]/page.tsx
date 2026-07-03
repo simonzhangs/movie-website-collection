@@ -56,19 +56,22 @@ export default async function TVDetailPage({ params }: TVPageProps) {
     <div>
       <JsonLd data={tvJsonLd(tv)} />
 
-      {/* ─── Hero ─── */}
-      <section className="relative h-[40vh] min-h-[300px] w-full overflow-hidden">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={getImageUrl(tv.backdrop_path, 'original')}
-          alt={tv.name}
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/50 to-transparent" />
-      </section>
+      {/* ─── Hero + 主要内容 ─── */}
+      <section className="relative">
+        {/* 背景图（绝对定位，作为底层背景） */}
+        <div className="absolute inset-x-0 top-0 h-[50vh] min-h-[350px] overflow-hidden">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={getImageUrl(tv.backdrop_path, 'original')}
+            alt={tv.name}
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/60 to-[#0a0a0f]/20" />
+        </div>
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="-mt-32 flex flex-col gap-8 md:flex-row">
+        {/* 内容区（通过 padding-top 自然沉底，不遮挡 Hero） */}
+        <div className="relative mx-auto max-w-7xl px-4 pt-[35vh] sm:px-6 lg:px-8 min-h-[350px]">
+          <div className="flex flex-col gap-8 md:flex-row">
           {/* 海报 */}
           <div className="flex-shrink-0">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -132,8 +135,11 @@ export default async function TVDetailPage({ params }: TVPageProps) {
             </div>
           </div>
         </div>
+        </div>
+      </section>
 
-        {/* ─── 广告位 ─── */}
+      {/* ─── 广告位 ─── */}
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mt-8">
           <AdSlot slotId="tv-detail" format="horizontal" />
         </div>
