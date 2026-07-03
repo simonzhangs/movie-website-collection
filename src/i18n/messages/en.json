@@ -63,6 +63,11 @@
     "error": "Something went wrong",
     "advertisement": "Advertisement"
   },
+  "notFound": {
+    "title": "Page Not Found",
+    "description": "The page you are looking for doesn't exist or has been moved.",
+    "backHome": "Back to Home"
+  },
   "seo": {
     "siteName": "CinePedia",
     "siteDescription": "Discover comprehensive information about movies and TV shows, including episode guides, cast, reviews and more.",

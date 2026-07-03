@@ -177,8 +177,8 @@ curl -X POST https://your-domain.com/api/revalidate \
     "paths": [
       "/en/tv/新剧ID",
       "/zh/tv/新剧ID",
-      "/en/tv/新剧ID/season-1/episode-1",
-      "/zh/tv/新剧ID/season-1/episode-1"
+      "/en/tv/新剧ID/season/1/episode/1",
+      "/zh/tv/新剧ID/season/1/episode/1"
     ]
   }'
 
@@ -193,9 +193,9 @@ curl "https://your-domain.com/api/revalidate?secret=xxx&path=/en/tv/12345"
 
 ### 5.3 每集独立页面
 
-**路由格式**：`/[locale]/tv/[id]/season-[s]/episode-[e]`
+**路由格式**：`/[locale]/tv/[id]/season/[s]/episode/[e]`
 
-示例 URL：`/zh/tv/1399/season-1/episode-1`（权力的游戏 S1E1）
+示例 URL：`/zh/tv/1399/season/1/episode/1`（权力的游戏 S1E1）
 
 **实现位置**：`src/app/[locale]/tv/[id]/season-[s]/episode-[e]/page.tsx`
 

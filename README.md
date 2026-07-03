@@ -105,8 +105,8 @@ curl -X POST http://localhost:3000/api/revalidate \
     "paths": [
       "/en/tv/12345",
       "/zh/tv/12345",
-      "/en/tv/12345/season-1/episode-1",
-      "/zh/tv/12345/season-1/episode-1"
+      "/en/tv/12345/season/1/episode/1",
+      "/zh/tv/12345/season/1/episode/1"
     ]
   }'
 ```

@@ -170,7 +170,7 @@ export default async function TVDetailPage({ params }: TVPageProps) {
                           (epNum) => (
                             <Link
                               key={epNum}
-                              href={`/tv/${id}/season-${season.season_number}/episode-${epNum}`}
+                              href={`/tv/${id}/season/${season.season_number}/episode/${epNum}`}
                               className="rounded-md border border-white/10 bg-white/5 px-2.5 py-1 text-xs text-gray-300 transition hover:bg-indigo-600/20 hover:text-indigo-300"
                             >
                               E{epNum}

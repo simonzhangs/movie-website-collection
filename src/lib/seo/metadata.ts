@@ -100,7 +100,7 @@ export function episodeMetadata(
       title,
       description,
       type: 'video.episode',
-      url: `${SITE_URL}/${locale}/tv/${tvId}/season-${seasonNumber}/episode-${episode.episode_number}`,
+      url: `${SITE_URL}/${locale}/tv/${tvId}/season/${seasonNumber}/episode/${episode.episode_number}`,
       images: episode.still_path
         ? [{ url: `${IMAGE_BASE}/w780${episode.still_path}`, width: 780, height: 439 }]
         : undefined,
@@ -112,7 +112,7 @@ export function episodeMetadata(
       description,
     },
     alternates: {
-      canonical: `/${locale}/tv/${tvId}/season-${seasonNumber}/episode-${episode.episode_number}`,
+      canonical: `/${locale}/tv/${tvId}/season/${seasonNumber}/episode/${episode.episode_number}`,
     },
   };
 }

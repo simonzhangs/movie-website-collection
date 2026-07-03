@@ -11,22 +11,14 @@ interface EpisodePageProps {
   params: Promise<{ locale: string; id: string; s: string; e: string }>;
 }
 
-// 从 URL 参数中解析季数和集数（路由格式 season-1/episode-1）
-function parseSeasonEpisode(s: string, e: string): { season: number; episode: number } {
-  const seasonMatch = s.match(/^season-(\d+)$/);
-  const episodeMatch = e.match(/^episode-(\d+)$/);
-  const season = seasonMatch ? parseInt(seasonMatch[1], 10) : NaN;
-  const episode = episodeMatch ? parseInt(episodeMatch[1], 10) : NaN;
-  return { season, episode };
-}
-
 export const dynamicParams = true;
 
 export async function generateMetadata({
   params,
 }: EpisodePageProps): Promise<Metadata> {
   const { id, locale, s, e } = await params;
-  const { season, episode } = parseSeasonEpisode(s, e);
+  const season = parseInt(s, 10);
+  const episode = parseInt(e, 10);
   if (isNaN(season) || isNaN(episode)) return { title: 'Episode' };
 
   try {
@@ -44,7 +36,8 @@ export default async function EpisodePage({ params }: EpisodePageProps) {
   const { id, locale, s, e } = await params;
   setRequestLocale(locale);
 
-  const { season, episode } = parseSeasonEpisode(s, e);
+  const season = parseInt(s, 10);
+  const episode = parseInt(e, 10);
   if (isNaN(season) || isNaN(episode)) notFound();
 
   const t = await getTranslations('episode');
@@ -147,7 +140,7 @@ export default async function EpisodePage({ params }: EpisodePageProps) {
         <div className="mt-8 flex items-center justify-between border-t border-white/5 pt-6">
           {prevEp ? (
             <Link
-              href={`/tv/${id}/season-${prevEp.s}/episode-${prevEp.e}`}
+              href={`/tv/${id}/season/${prevEp.s}/episode/${prevEp.e}`}
               className="flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-sm transition hover:bg-white/10"
             >
               <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -170,7 +163,7 @@ export default async function EpisodePage({ params }: EpisodePageProps) {
           </Link>
 
           <Link
-            href={`/tv/${id}/season-${season}/episode-${nextEp}`}
+            href={`/tv/${id}/season/${season}/episode/${nextEp}`}
             className="flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-sm transition hover:bg-white/10"
           >
             <span>{t('episode')} {nextEp}</span>

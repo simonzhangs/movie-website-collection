@@ -63,6 +63,11 @@
     "error": "出错了",
     "advertisement": "广告"
   },
+  "notFound": {
+    "title": "页面未找到",
+    "description": "您访问的页面不存在或已被移动。",
+    "backHome": "回到首页"
+  },
   "seo": {
     "siteName": "影视百科",
     "siteDescription": "发现电影和电视剧的全面信息，包含剧集指南、演员阵容、评论等。",
